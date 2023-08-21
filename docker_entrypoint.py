@@ -4,7 +4,7 @@ Uses kubectl to drain nodes once their termination notice is present.'''
 from os import getenv
 from time import sleep
 from subprocess import call
-from requests import get
+from requests import get, put
 
 
 def main():
@@ -23,12 +23,12 @@ def main():
         sleep(15)
         url = "http://169.254.169.254/latest/api/token"
         headers = {"X-aws-ec2-metadata-token-ttl-seconds": "180"}
-        token_response = requests.put(url, headers=headers)
+        token_response = put(url, headers=headers)
 
         if token_response.status_code == 200:
             token = token_response.text
             headers = {"X-aws-ec2-metadata-token": token}
-            response = requests.get("http://169.254.169.254/latest/meta-data/spot/termination-time", headers=headers)
+            response = get("http://169.254.169.254/latest/meta-data/spot/termination-time", headers=headers)
 
             if response.status_code == 200:
                 kube_command = ['kubectl', 'drain', node_name]
