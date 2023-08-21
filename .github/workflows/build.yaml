@@ -1,7 +1,7 @@
 name: Service Deployment
 on:
   push:
-    branches: [ main ]
+    branches: [ staging, production ]
 jobs:
   build:
     name: "Build and push container 🛳️"
