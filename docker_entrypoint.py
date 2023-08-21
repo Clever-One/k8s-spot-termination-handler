@@ -19,12 +19,12 @@ def main():
 
     counter = 0
 
-    while True:
-        sleep(15)
-        url = "http://169.254.169.254/latest/api/token"
-        headers = {"X-aws-ec2-metadata-token-ttl-seconds": "180"}
-        token_response = put(url, headers=headers)
+    url = "http://169.254.169.254/latest/api/token"
+    headers = {"X-aws-ec2-metadata-token-ttl-seconds": "180"}
+    token_response = put(url, headers=headers)
 
+    while True:
+    
         if token_response.status_code == 200:
             token = token_response.text
             headers = {"X-aws-ec2-metadata-token": token}
@@ -41,6 +41,7 @@ def main():
                     break
             else:
                 if counter == 60:
+                    token_response = put(url, headers=headers)
                     counter = 0
                     print("Termination notice status: %s, on Node: %s" %
                         (response.status_code, node_name)
