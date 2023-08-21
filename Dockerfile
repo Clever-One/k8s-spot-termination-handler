@@ -1,4 +1,4 @@
-FROM python:3-slim-stretch
+FROM python:3-slim-buster
 
 ARG VERSION=undefined
 ENV VERSION ${VERSION}
