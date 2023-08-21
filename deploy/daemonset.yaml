@@ -16,7 +16,7 @@ spec:
       # serviceAccountName: k8s-spot-termination-handler
       containers:
       - name: k8s-spot-termination-handler
-        image: quay.io/pusher/k8s-spot-termination-handler:v0.1.0
+        image: 130086670324.dkr.ecr.eu-central-1.amazonaws.com/k8s-spot-termination-handler:latest
         imagePullPolicy: IfNotPresent
         env:
           - name: NODE_NAME
