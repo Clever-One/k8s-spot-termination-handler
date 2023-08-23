@@ -43,15 +43,9 @@ def main():
                 if counter == 60:
                     token_response = put(url, headers=headers)
                     counter = 0
-                    print("Termination notice status: %s, on Node: %s" %
-                        (response.status_code, node_name)
-                        )
                 counter += 5
                 sleep(5)
-        else:
-            print("No Token: %s" %
-                (token_response.status_code)
-                )
+        
 
 
 if __name__ == '__main__':
