@@ -19,9 +19,9 @@ def main():
 
     counter = 0
 
-    url = "http://169.254.169.254/latest/api/token"
-    headers = {"X-aws-ec2-metadata-token-ttl-seconds": "180"}
-    token_response = put(url, headers=headers)
+    token_url = "http://169.254.169.254/latest/api/token"
+    token_headers = {"X-aws-ec2-metadata-token-ttl-seconds": "180"}
+    token_response = put(token_url, headers=token_headers)
 
     while True:
     
@@ -41,7 +41,7 @@ def main():
                     break
             else:
                 if counter == 60:
-                    token_response = put(url, headers=headers)
+                    token_response = put(token_url, headers=token_headers)
                     counter = 0
                 counter += 5
                 sleep(5)
